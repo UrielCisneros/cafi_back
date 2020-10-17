@@ -27,6 +27,8 @@ app.use(cors());
 app.use(express.json());
 
 //rutes
+app.use('/api/prueba',require('./routes/blog'))
+
 /* app.use('/api/admin', require('./routes/administrador'));
 app.use('/api/blog', require('./routes/blog'));
 app.use('/api/pedidos', require('./routes/pedidos'));
