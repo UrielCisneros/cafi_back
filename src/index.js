@@ -2,6 +2,10 @@ require('dotenv').config();
 const app = require('./app');
 require('./database');
 
+//settings
+app.set('port', (process.env.PORT || '0.0.0.0') );
+app.set('host', (process.env.HOST || '0.0.0.0'));
+
 
 async function main() {
     try {
