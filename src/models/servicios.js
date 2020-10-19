@@ -1,4 +1,5 @@
 const {Schema,model} = require('mongoose');
+var Float = require('mongoose-float').loadType(mongoose,4);
 
 const serviciosSchema = new Schema({
     tipoDeServicios: String,
@@ -8,6 +9,9 @@ const serviciosSchema = new Schema({
     video: String,
     paquetes: [{
         nombrePaquete: String,
+        precio: {
+            type: Float
+        },
         beneficios: [{
             tipoBaneficio: String,
         }]
