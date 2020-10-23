@@ -26,6 +26,8 @@ app.use(cors());
 app.use(express.json());
 
 //rutes
+
+app.use('/api/login',require(''));
 app.use('/api/prueba',require('./routes/blog'));
 
 

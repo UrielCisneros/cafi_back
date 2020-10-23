@@ -6,6 +6,7 @@ const userModel = new Schema({
     rol: String,
     telefono: String,
     imagen: String,
+    password: String,
 },{
     timestamps: true
 });
