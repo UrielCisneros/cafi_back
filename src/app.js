@@ -27,7 +27,7 @@ app.use(express.json());
 
 //rutes
 
-app.use('/api/login',require(''));
+app.use('/api/login',require('./routes/user'));
 app.use('/api/prueba',require('./routes/blog'));
 
 
