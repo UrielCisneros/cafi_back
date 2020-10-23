@@ -24,7 +24,7 @@ const empresaSchema = new Schema({
             type: Float
         },
         beneficios: [{
-            tipoBaneficio: String,
+            tipoBeneficio: String,
         }]
     }],
 },{

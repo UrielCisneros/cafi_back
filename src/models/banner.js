@@ -1,7 +1,7 @@
 const {Schema, model} = require('mongoose');
 
 const bannerSchema = new Schema({
-    imagen: [{
+    banner: [{
         imagen: String,
         titulo: String,
         subTitulo: String,

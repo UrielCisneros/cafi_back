@@ -3,7 +3,7 @@ var Float = require('mongoose-float').loadType(mongoose,4);
 
 const serviciosSchema = new Schema({
     tipoDeServicios: String,
-    banner: String,
+    imagenBanner: String,
     titulo: String,
     contenido: String,
     video: String,
