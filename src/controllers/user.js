@@ -62,9 +62,12 @@ userCtrl.createUser = (req,res) => {
         const newUser = new userModel(req.body);
         newUser.rol = 'Admin';
         console.log(newUser);
+        console.log(password);
+        console.log(repeatPassword);
         if(req.file){
             newUser.imagen = req.file.key;
         }
+        
         if(!password || !repeatPassword){
             res.status(404).json({ message: 'Las contrasenas son obligatorias' });
         }else{
