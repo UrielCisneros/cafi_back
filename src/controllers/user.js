@@ -56,10 +56,10 @@ userCtrl.getUsers = async (req,res) => {
     }
 }
 
-userCtrl.createUser = async (req,res) => {
+userCtrl.createUser = (req,res) => {
     try {
         const { password,repeatPassword } = req.body;
-        const newUser = await new userModel(req.body);
+        const newUser = new userModel(req.body);
         newUser.rol = 'Admin';
         console.log(newUser);
         if(req.file){
