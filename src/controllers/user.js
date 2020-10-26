@@ -61,6 +61,7 @@ userCtrl.createUser = async (req,res) => {
         const {password,repeatPassword} = req.body;
         const newUser = new userModel(req.body);
         newUser.rol = 'Admin';
+        console.log(newUser);
         if(req.file){
             newUser.imagen = req.file.key;
         }
