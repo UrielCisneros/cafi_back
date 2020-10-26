@@ -71,12 +71,12 @@ userCtrl.createUser = async (req,res) => {
             if(password !== repeatPassword){
                 res.status(404).json({ message: 'Las contrasenas no son iguales' });
             }else{
-                bcrypt.hash(password,null,null, function (err,hash){
+                bcrypt.hash(password,null,null, async function (err,hash){
                     if(err){
                         res.status(500).json({ message: 'Error al encriptar la contrasena', err });
                     }else{
                         newUser.password = hash;
-                        newUser.save((err,useStored) => {
+                        await newUser.save((err,useStored) => {
                             if(err){
                                 res.status(500).json({ message: 'Ups, algo paso al registrar el usuario', err });
                             }else{
