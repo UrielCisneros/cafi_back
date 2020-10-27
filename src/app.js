@@ -27,8 +27,10 @@ app.use(express.json());
 
 //rutes
 
-app.use('/api/user/',require('./routes/user'));
-app.use('/api/prueba',require('./routes/blog'));
+app.use('/api/user',require('./routes/user'));
+app.use('/api/blog',require('./routes/blog'));
+app.use('/api/empresa',require('./routes/empresa'));
+app.use('/api/empresas',require('./routes/empresas'));
 
 
 
