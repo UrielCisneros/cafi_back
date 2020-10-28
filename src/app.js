@@ -31,6 +31,9 @@ app.use('/api/user',require('./routes/user'));
 app.use('/api/blog',require('./routes/blog'));
 app.use('/api/empresa',require('./routes/empresa'));
 app.use('/api/empresas',require('./routes/empresas'));
+app.use('/api/banner',require('./routes/banner'));
+app.use('/api/capacitacion',require('./routes/capacitacion'));
+app.use('/api/servicios',require('./routes/servicios'));
 
 
 
