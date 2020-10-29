@@ -32,7 +32,7 @@ userCtrl.login = async (req ,res) => {
                         nombre: user.nombre,
                         _id: user._id,
                         imagen: user.imagen,
-                        rol: 'Admin'
+                        rol: user.rol,
                     },
                     process.env.AUTH_KEY
                 );
