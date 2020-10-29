@@ -19,15 +19,6 @@ const empresaSchema = new mongoose.Schema({
     numeroDeClientes: String,
     urlVideoPromocional: String,
     correo: String,
-    paquetes: [{
-        nombrePaquete: String,
-        precio: {
-            type: Float
-        },
-        beneficios: [{
-            tipoBeneficio: String,
-        }]
-    }],
 },{
     timestamps: true
 })

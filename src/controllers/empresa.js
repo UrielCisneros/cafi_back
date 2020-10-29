@@ -15,6 +15,11 @@ empresaCtrl.subirImagen = async (req, res, next) => {
 empresaCtrl.createEmpresa = async (req,res) => {
     try {
         const newEmpresa = new empresaModel(req.body);
+        const {lat,lng} = req.body;
+        newEmpresa.ubicacion = {
+            lat,
+            lng,
+        }
         if(req.file){
             newEmpresa.logo = req.file.key;
         }
@@ -31,22 +36,6 @@ empresaCtrl.createEmpresa = async (req,res) => {
             }
         })
 
-    } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Error en el servidor', error });  
-    }
-}
-
-empresaCtrl.editPaquetes = async (req,res) => {
-    try {
-        const {paquetes, ubicacion} = req.body;
-        console.log(paquetes);
-        const empresaBase = await empresaModel.findById(req.params.idEmpresa);
-        const editEmpresa = empresaBase;
-        editEmpresa.paquetes = paquetes;
-        editEmpresa.ubicacion = ubicacion;
-        await empresaModel.findByIdAndUpdate(req.params.idEmpresa, editEmpresa);
-        res.status(200).json({ message: 'Paquetes agregados' });
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: 'Error en el servidor', error });  
