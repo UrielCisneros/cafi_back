@@ -60,7 +60,7 @@ userCtrl.createUser = (req,res) => {
     try {
         const { password,repeatPassword } = req.body;
         const newUser = new userModel(req.body);
-        newUser.rol = 'Admin';
+        newUser.rol = 'User';
         console.log(newUser);
         console.log(password);
         console.log(repeatPassword);
@@ -92,7 +92,58 @@ userCtrl.createUser = (req,res) => {
                                             nombre: newUser.nombre,
                                             _id: newUser._id,
                                             imagen: newUser.imagen,
-                                            rol: 'Admin'
+                                            rol: newUser.rol,
+                                        },
+                                        process.env.AUTH_KEY
+                                    );
+									res.json({ token });
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error en el servidor', error });   
+    }
+}
+
+userCtrl.createAdmin = (req,res) => {
+    try {
+        const { password,repeatPassword } = req.body;
+        const newUser = new userModel(req.body);
+        newUser.rol = 'Admin';
+        if(req.file){
+            newUser.imagen = req.file.key;
+        }
+        
+        if(!password || !repeatPassword){
+            res.status(404).json({ message: 'Las contrasenas son obligatorias' });
+        }else{
+            if(password !== repeatPassword){
+                res.status(404).json({ message: 'Las contrasenas no son iguales' });
+            }else{
+                bcrypt.hash(password,null,null, async function (err,hash){
+                    if(err){
+                        res.status(500).json({ message: 'Error al encriptar la contrasena', err });
+                    }else{
+                        newUser.password = hash;
+                        await newUser.save((err,useStored) => {
+                            if(err){
+                                res.status(500).json({ message: 'Ups, algo paso al registrar el usuario', err });
+                            }else{
+                                if(!useStored){
+                                    res.status(404).json({ message: 'Error al crear el usuario' });
+                                }else{
+                                    const token = jwt.sign(
+                                        {
+                                            email: newUser.email,
+                                            nombre: newUser.nombre,
+                                            _id: newUser._id,
+                                            imagen: newUser.imagen,
+                                            rol: newUser.rol,
                                         },
                                         process.env.AUTH_KEY
                                     );
