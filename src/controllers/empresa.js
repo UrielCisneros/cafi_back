@@ -20,6 +20,7 @@ empresaCtrl.createEmpresa = async (req,res) => {
             lat,
             lng,
         }
+        console.log(req.file);
         if(req.file){
             newEmpresa.logo = req.file.key;
         }
