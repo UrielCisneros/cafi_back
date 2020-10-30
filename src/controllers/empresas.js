@@ -6,9 +6,10 @@ const empresasModel = require('../models/empresas');
 empresasCtrl.subirImagen = async (req, res, next) => {
 	await imagen.upload(req, res, function(err) {
 		if (err) {
-			res.json({ message: err });
-		}
-		return next();
+			res.status(500).json({ message: "error al subir imagen" });
+		}else{
+            return next();
+        }
 	});
 };
 

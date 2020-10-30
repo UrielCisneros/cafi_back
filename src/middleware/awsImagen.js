@@ -22,8 +22,22 @@ const fileFilter = (req, file, cb) => {
   
 
   //Aqui es donde conectamos al Bucket de Amazon S3 y le damos los filtros
-  const configuracionMulter ={
+  const configuracionMulter = {
     fileFilter,
+    storage: multerS3({
+      s3: s3,
+      bucket: process.env.NAME_BUCKET_AMS,
+      acl: 'public-read',
+      metadata: function (req, file, cb) {
+        cb(null, {fieldName: 'Testing_metadata'});
+      },
+      key: function (req, file, cb) {
+        cb(null, Date.now().toString())
+      }
+    }) 
+  };
+
+  const configuracionMulterInFilter = {
     storage: multerS3({
       s3: s3,
       bucket: process.env.NAME_BUCKET_AMS,
@@ -51,6 +65,8 @@ subir.eliminarImagen = (keyDeleted) => {
   }
 
 subir.upload = multer(configuracionMulter).single('imagen');
+
+subir.uploadFile = multer(configuracionMulterInFilter).single('archivo');
 
 
 module.exports = subir;

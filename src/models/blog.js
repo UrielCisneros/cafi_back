@@ -12,7 +12,9 @@ const blogModel = new Schema({
         unique: true
     },
     archivos: [{
-        archivo: String
+        archivo: String,
+        name: String,
+        extencion: String,
     }],
     comentarios: [{
         usuario: {

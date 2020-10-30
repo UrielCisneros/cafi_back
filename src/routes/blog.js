@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const { 
     subirImagen,
+    subirArchivo,
     createBlog,
     editBlog,
     deleteBlog,
@@ -15,15 +16,15 @@ const {
 } = require('../controllers/blog');
 
 router.route('/')
-    .post(createBlog)
+    .post(subirImagen,createBlog)
     .get(getBlogs);
 
 router.route('/:idBlog')
-    .put(editBlog)
+    .put(subirImagen,editBlog)
     .delete(deleteBlog);
 
 router.route('/archivos/:idBlog')
-    .post(createArchivoBlog);
+    .post(subirArchivo,createArchivoBlog);
 
 router.route('/archivos/:idBlog/edit/:idArchivo')
     .put(editArchivoBlog)
