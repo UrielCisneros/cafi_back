@@ -26,6 +26,7 @@ bannerCtrl.getBanners = async (req,res) => {
 bannerCtrl.createBanner = async (req,res) => {
     try {
         const newBanner = new bannerModel(req.body);
+        console.log(req.file);
         if(req.file){
             newBanner.imagen = req.file.key;
         }
