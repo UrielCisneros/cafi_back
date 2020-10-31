@@ -119,7 +119,32 @@ blogCtrl.createArchivoBlog = async (req,res) => {
 }
 
 blogCtrl.editArchivoBlog = async (req,res) => {
+    try {
+        const blogBase = await blogModel.findById(req.params.idBlog);
+        const archivoBase = blogBase.archivos.filter((x) => x._id == req.params.idArchivo);
 
+        const newArchivo = req.file.key;
+        const name = req.file.originalname;
+        const extencion = name.split('.');
+
+        await blogBase.updateOne(
+            {
+                'archivos._id': req.params.idArchivo
+            },
+            {
+                $set: {
+                    'archivos.$': { archivo: newArchivo, name: name, extencion: extencion }
+                }
+            }
+        )
+
+        await imagen.eliminarImagen(archivoBase[0].archivo);
+        res.status(200).json({ message: 'Archivo actualizado' });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Error en el servidor', error });  
+    }
 }
 
 blogCtrl.deleteArchivoBlog = async (req,res) => {

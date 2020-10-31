@@ -13,7 +13,8 @@ const s3 = new aws.S3();
 
 //Filtros que se aceptaran en los archivos
 const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+  console.log(file);
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/webp' ) {
         cb(null, true);
     } else {
         return cb(new Error('Formato no valido'));

@@ -26,8 +26,8 @@ router.route('/:idBlog')
 router.route('/archivos/:idBlog')
     .post(subirArchivo,createArchivoBlog);
 
-router.route('/archivos/:idBlog/edit/:idArchivo')
-    .put(editArchivoBlog)
+router.route('/archivos/:idBlog/file/:idArchivo')
+    .put(subirArchivo,editArchivoBlog)
     .delete(deleteArchivoBlog);
 
 router.route('/comentario/:idBlog/user/:idUser')
