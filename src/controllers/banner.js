@@ -28,7 +28,7 @@ bannerCtrl.createBanner = async (req,res) => {
         const newBanner = new bannerModel(req.body);
         console.log(req.file);
         if(req.file){
-            newBanner.imagen = req.file.key;
+            newBanner.imagenBanner = req.file.key;
         }
         await newBanner.save();
         res.status(200).json({ message: 'Banner creado' });
@@ -43,12 +43,12 @@ bannerCtrl.editBanner = async (req,res) => {
         const bannerBase = await bannerModel.findById(req.params.idBanner);
         const editBanner = req.body;
         if(req.file){
-            editBanner.imagen = req.file.key;
-            if(bannerBase.imagen){
-                await imagen.eliminarImagen(bannerBase.imagen);
+            editBanner.imagenBanner = req.file.key;
+            if(bannerBase.imagenBanner){
+                await imagen.eliminarImagen(bannerBase.imagenBanner);
             }
         }else{
-            editBanner.imagen = bannerBase.imagen;
+            editBanner.imagenBanner = bannerBase.imagenBanner;
         }
         await bannerModel.findByIdAndUpdate(req.params.idBanner,editBanner);
         res.status(200).json({ message: 'Banner actualizado' });
@@ -61,8 +61,8 @@ bannerCtrl.editBanner = async (req,res) => {
 bannerCtrl.deleteBanner = async (req,res) => {
     try {
         const bannerBase = await bannerModel.findById(req.params.idBanner);
-        if(bannerBase.imagen && bannerBase.imagen != null || bannerBase.imagen != '' ){
-			await imagen.eliminarImagen(bannerBase.imagen);
+        if(bannerBase.imagenBanner && bannerBase.imagenBanner != null || bannerBase.imagenBanner != '' ){
+			await imagen.eliminarImagen(bannerBase.imagenBanner);
 		}
 		await bannerModel.findByIdAndDelete(req.params.idBanner);
 		res.status(200).json({ message: 'Eliminado correctamente' });
